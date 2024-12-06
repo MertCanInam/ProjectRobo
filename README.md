@@ -30,5 +30,5 @@ Projenizi lokal ortamınızda çalıştırmak için aşağıdaki adımları izle
 
 1. Projeyi klonlayın:
    ```bash
-   git clone https://github.com/kullaniciadiniz/robot-battery-management-system.git
+   git clone https://github.com/MertCanInam/ProjectRobo.git
 
