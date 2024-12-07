@@ -29,6 +29,11 @@ Projenin çalışması için aşağıdaki kütüphanelere ihtiyaç duyulmaktadı
 Projenizi lokal ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
 
 1. Projeyi klonlayın:
-   ```bash
    git clone https://github.com/MertCanInam/ProjectRobo.git
+2. Proje dizinine gidin:
+   cd ProjectRobo
+3. Bağımlılıkları yükleyin
+4. Veritabanı yapılandırmalarını yapın
+5. Projeyi başlatın
+   
 
