@@ -1,17 +1,16 @@
-const batteryService = require('../services/batteryService');  // batteryService'i import ediyoruz
+const batteryService = require('../services/batteryService');  // Service'i içe aktarıyoruz
 
+// GET /battery_data endpoint
 const getBatteryData = async (req, res) => {
   try {
-    const batteryData = await batteryService.getBatteryData();  // Service katmanından veri alıyoruz
-    if (batteryData && batteryData.length > 0) {
-      res.status(200).json(batteryData);  // Veriyi JSON formatında döndürüyoruz
-    } else {
-      res.status(404).json({ message: 'Veri bulunamadı' });  // Eğer veri yoksa 404 döndür
-    }
+    const { role, userId } = req.user;  // Auth middleware tarafından eklenen userId'yi alıyoruz
+    const data = await batteryService.getBatteryData(role, userId);  // Veriyi alıyoruz
+    res.json(data);  // Veriyi geri gönderiyoruz
   } catch (error) {
-    console.error('Controller hatası:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).send('Veri alınırken hata oluştu: ' + error.message);
   }
 };
 
-module.exports = { getBatteryData };
+module.exports = {
+  getBatteryData
+};
