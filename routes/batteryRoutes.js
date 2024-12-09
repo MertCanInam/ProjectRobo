@@ -12,5 +12,6 @@ router.get(
   roleMiddleware(['user', 'admin','maintainer']),  // Admin ve User rolü ile erişilebilir
   batteryController.getBatteryData
 );
+/// Sadece user kısmını yap ve yeni kullanıcılar için sorun var onu çöz 
 
 module.exports = router;

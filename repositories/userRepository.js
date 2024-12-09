@@ -10,7 +10,29 @@ const getUserByUsername = async (username) => {
     throw error;
   }
 };
+// Yeni kullanıcı oluşturma
+const createUser = async (username, password, company, role) => {
+  try {
+    // Şifreyi hashle
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Yeni kullanıcıyı veritabanına kaydet
+    const user = await User.create({
+      username,
+      password: hashedPassword,  // Hashlenmiş şifreyi kaydediyoruz
+      company,
+      role,
+    });
+
+    return user;
+  } catch (error) {
+    console.error('Kullanıcı oluşturulurken hata oluştu:', error);
+    throw error;
+  }
+};
+
+
 
 module.exports = {
-  getUserByUsername,
+  getUserByUsername, createUser
 };

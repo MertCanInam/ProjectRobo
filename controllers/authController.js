@@ -26,5 +26,22 @@ const login = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+const { registerUser } = require('../services/userService');  // userService'i import ediyoruz
 
-module.exports = { login };
+// Register (Kayıt) Fonksiyonu
+const register = async (req, res) => {
+  const { username, password, company, role } = req.body;
+
+  try {
+    const user = await registerUser(username, password, company, role);
+    res.status(201).json({ message: 'Kullanıcı başarıyla oluşturuldu', user });
+  } catch (error) {
+    console.error('Kullanıcı oluşturulurken hata oluştu:', error);
+    res.status(500).json({ message: 'Kullanıcı oluşturulurken hata oluştu' });
+  }
+};
+
+
+
+
+module.exports = { login ,register };

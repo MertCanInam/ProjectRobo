@@ -1,6 +1,9 @@
+const bcrypt = require('bcryptjs');  // bcrypt'i import ediyoruz
 const userRepository = require('../repositories/userRepository');  // userRepository'i import ediyoruz
-const { comparePassword } = require('../utils/passwordUtils');   // Şifre karşılaştırma için passwordUtils'i import ediyoruz
+const { comparePassword } = require('../utils/passwordUtils');  // Şifre karşılaştırma için passwordUtils'i import ediyoruz
+const { User } = require('../models/userModel'); // User modelini import ediyoruz
 
+// Kullanıcı girişi işlemi (login)
 const login = async (username, inputPassword) => {
   try {
     // Kullanıcıyı veritabanından alıyoruz
@@ -22,4 +25,25 @@ const login = async (username, inputPassword) => {
   }
 };
 
-module.exports = { login };
+// Kullanıcı oluşturma ve şifre hashleme fonksiyonu (register)
+const registerUser = async (username, password, company, role) => {
+  try {
+    // Şifreyi hashle
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Yeni kullanıcıyı oluştur
+    const user = await User.create({
+      username,
+      password: hashedPassword,  // Hashlenmiş şifreyi kaydediyoruz
+      company,
+      role,
+    });
+
+    return { success: true, message: 'Kullanıcı başarıyla oluşturuldu', user };
+  } catch (error) {
+    console.error('Kullanıcı oluşturulurken hata oluştu:', error);
+    throw new Error('Kullanıcı oluşturulurken hata oluştu');
+  }
+};
+
+module.exports = { login, registerUser };

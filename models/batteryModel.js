@@ -22,22 +22,7 @@ const BatteryData = sequelize.define('BatteryData', {
       key: 'id',  // user_id'nin, users tablosundaki id'ye bağlanması gerekir
     },
   },
-  voltage: {
-    type: DataTypes.DATE,
-    allowNull: false,  // Boş olamaz
-  },
-  current: {
-    type: DataTypes.DATE,
-    allowNull: false,  // Boş olamaz
-  },
-  temperature: {
-    type: DataTypes.DATE,
-    allowNull: false,  // Boş olamaz
-  },
-  capacity: {
-    type: DataTypes.DATE,
-    allowNull: false,  // Boş olamaz
-  },
+ 
 }, {
   tableName: 'battery_data',  // Veritabanındaki tablo adı
   timestamps: false,  // createdAt ve updatedAt kullanılmayacak
